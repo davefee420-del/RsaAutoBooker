@@ -26,6 +26,86 @@ jobs:
           unzip -q /tmp/gradle.zip -d /tmp/gradle
           echo "/tmp/gradle/gradle-8.2/bin" >> $GITHUB_PATH
 
+      - name: Create missing mipmap resources
+        run: |
+          mkdir -p app/src/main/res/mipmap-mdpi
+          mkdir -p app/src/main/res/mipmap-hdpi
+          mkdir -p app/src/main/res/mipmap-xhdpi
+          mkdir -p app/src/main/res/mipmap-xxhdpi
+          mkdir -p app/src/main/res/mipmap-xxxhdpi
+          mkdir -p app/src/main/res/mipmap-anydpi-v26
+          mkdir -p app/src/main/res/values
+          mkdir -p app/src/main/res/drawable
+          
+          # Create colors.xml
+          cat > app/src/main/res/values/colors.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <color name="ic_launcher_background">#1B5E20</color>
+              <color name="colorPrimary">#1B5E20</color>
+              <color name="colorPrimaryDark">#0D3B10</color>
+              <color name="colorAccent">#FFD700</color>
+          </resources>
+          EOF
+          
+          # Create simple vector icon foreground
+          cat > app/src/main/res/drawable/ic_launcher_foreground.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <vector xmlns:android="http://schemas.android.com/apk/res/android"
+              android:width="108dp"
+              android:height="108dp"
+              android:viewportWidth="108"
+              android:viewportHeight="108">
+              <path android:fillColor="#FFFFFF" android:pathData="M54,30 C38,30 30,42 30,54 C30,66 38,78 54,78 C70,78 78,66 78,54 C78,42 70,30 54,30 Z"/>
+          </vector>
+          EOF
+          
+          # Create adaptive icon XML
+          cat > app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+              <background android:drawable="@color/ic_launcher_background"/>
+              <foreground android:drawable="@drawable/ic_launcher_foreground"/>
+          </adaptive-icon>
+          EOF
+          
+          # Create placeholder PNG icons using Python
+          python3 << 'PYEOF'
+          import struct
+          import zlib
+          import os
+          
+          sizes = {'mdpi': 48, 'hdpi': 72, 'xhdpi': 96, 'xxhdpi': 144, 'xxxhdpi': 192}
+          
+          for folder, px in sizes.items():
+              # Create minimal valid PNG (transparent)
+              raw_data = b''
+              for row in range(px):
+                  raw_data += b'\x00'  # filter byte
+                  raw_data += b'\x00\x00\x00\x00' * px  # RGBA transparent
+              
+              compressed = zlib.compress(raw_data)
+              
+              def png_chunk(chunk_type, data):
+                  chunk = chunk_type + data
+                  crc = zlib.crc32(chunk) & 0xffffffff
+                  return struct.pack('>I', len(data)) + chunk + struct.pack('>I', crc)
+              
+              ihdr = struct.pack('>IIBBBBB', px, px, 8, 6, 0, 0, 0)
+              png = b'\x89PNG\r\n\x1a\n'
+              png += png_chunk(b'IHDR', ihdr)
+              png += png_chunk(b'IDAT', compressed)
+              png += png_chunk(b'IEND', b'')
+              
+              path = f'app/src/main/res/mipmap-{folder}'
+              with open(f'{path}/ic_launcher.png', 'wb') as f:
+                  f.write(png)
+              with open(f'{path}/ic_launcher_round.png', 'wb') as f:
+                  f.write(png)
+          
+          print("Icons created successfully!")
+          PYEOF
+
       - name: Build Debug APK
         run: gradle assembleDebug --no-daemon --stacktrace
         env:
