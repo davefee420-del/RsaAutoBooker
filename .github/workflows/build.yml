@@ -3,30 +3,35 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: 8.2
 
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      - name: Build Debug APK
+        run: gradle assembleDebug
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: RSA-AutoBooker-v3-Flawless
-        path: app/build/outputs/apk/debug/*.apk
+      - name: Verify APK exists
+        run: |
+          ls -la app/build/outputs/apk/debug/
+          test -f app/build/outputs/apk/debug/*.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: RSA-AutoBooker-v3-Flawless
+          path: app/build/outputs/apk/debug/*.apk
