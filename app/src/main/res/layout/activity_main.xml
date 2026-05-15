@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/irish_gradient_bg">
+
+    <!-- Animated Background Overlay -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/glass_overlay"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Glass App Bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/appBar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/glass_dark"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/glass_border"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="12dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_shamrock"
+                android:contentDescription="Logo"
+                app:tint="@color/irish_gold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="@string/app_name"
+                android:textColor="@color/irish_white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/modeBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛡️ STEALTH"
+                android:textColor="@color/irish_green"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:background="@drawable/badge_bg"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:layout_marginEnd="8dp" />
+
+            <ImageButton
+                android:id="@+id/settingsBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_settings"
+                android:contentDescription="Settings"
+                app:tint="@color/irish_white" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Tricolour Accent Bar -->
+    <LinearLayout
+        android:id="@+id/tricolourBar"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@color/irish_green" />
+        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@color/irish_white" />
+        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@color/irish_orange" />
+    </LinearLayout>
+
+    <!-- Glass Status Bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/statusBarCard"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="6dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/glass_medium"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/glass_border"
+        app:layout_constraintTop_toBottomOf="@id/tricolourBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <View
+                android:id="@+id/statusIndicator"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/dot_grey"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="○ IDLE"
+                android:textColor="@color/irish_white_dim"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
+
+            <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RSA Auto Booker v3.0"
+                android:textColor="@color/irish_white_dim"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- WebView Container with Glass Border -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/webViewCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/glass_light"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/glass_border"
+        app:layout_constraintTop_toBottomOf="@id/statusBarCard"
+        app:layout_constraintBottom_toTopOf="@id/glassStatsBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Loading Overlay -->
+        <FrameLayout
+            android:id="@+id/loadingOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/glass_dark"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ProgressBar
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/irish_gold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="60dp"
+                android:text="Loading MyRoadSafety..."
+                android:textColor="@color/irish_white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Glass Stats Bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/glassStatsBar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/glass_medium"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/glass_border"
+        app:layout_constraintBottom_toTopOf="@id/glassBottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="6dp">
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <TextView android:id="@+id/statChecks" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/irish_gold" android:textSize="17sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CHECKS" android:textColor="@color/irish_white_dim" android:textSize="9sp" android:textStyle="bold" />
+            </LinearLayout>
+            <View android:layout_width="1dp" android:layout_height="28dp" android:background="@color/glass_border" />
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <TextView android:id="@+id/statSlots" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/irish_orange" android:textSize="17sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SLOTS" android:textColor="@color/irish_white_dim" android:textSize="9sp" android:textStyle="bold" />
+            </LinearLayout>
+            <View android:layout_width="1dp" android:layout_height="28dp" android:background="@color/glass_border" />
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <TextView android:id="@+id/statBooked" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/irish_green" android:textSize="17sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BOOKED" android:textColor="@color/irish_white_dim" android:textSize="9sp" android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Glass Bottom Nav -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/glassBottomNav"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/glass_dark"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/glass_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingBottom="4dp">
+
+            <LinearLayout
+                android:id="@+id/navHome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView android:tag="icon" android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_home" android:contentDescription="Home" app:tint="@color/irish_white" />
+                <TextView android:tag="label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="@color/irish_white" android:textSize="10sp" android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navHistory"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView android:tag="icon" android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_history" android:contentDescription="History" app:tint="@color/irish_white_dim" />
+                <TextView android:tag="label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="History" android:textColor="@color/irish_white_dim" android:textSize="10sp" android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <!-- Play Button -->
+            <FrameLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="-16dp">
+                <ImageButton
+                    android:id="@+id/playBtn"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle_play"
+                    android:src="@drawable/ic_play"
+                    android:contentDescription="Start Monitoring"
+                    android:elevation="12dp"
+                    app:tint="@android:color/black" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/navAlerts"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView android:tag="icon" android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_bell" android:contentDescription="Alerts" app:tint="@color/irish_white_dim" />
+                <TextView android:tag="label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alerts" android:textColor="@color/irish_white_dim" android:textSize="10sp" android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navProfile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView android:tag="icon" android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_user" android:contentDescription="Profile" app:tint="@color/irish_white_dim" />
+                <TextView android:tag="label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textColor="@color/irish_white_dim" android:textSize="10sp" android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

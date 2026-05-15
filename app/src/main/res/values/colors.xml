@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Irish Theme -->
+    <color name="irish_green">#00C853</color>
+    <color name="irish_green_dark">#0F5132</color>
+    <color name="irish_white">#FFFFFF</color>
+    <color name="irish_orange">#FF6B35</color>
+    <color name="irish_gold">#FFD700</color>
+    <color name="irish_black">#0A0A0F</color>
+    <color name="irish_black_light">#14141E</color>
+    <color name="irish_white_dim">#88FFFFFF</color>
+
+    <!-- Glassmorphism -->
+    <color name="glass_dark">#CC0A0A0F</color>
+    <color name="glass_medium">#B314141E</color>
+    <color name="glass_light">#9914141E</color>
+    <color name="glass_border">#33FFFFFF</color>
+</resources>

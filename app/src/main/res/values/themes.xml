@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.RsaAutoBooker" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/irish_green_dark</item>
+        <item name="colorPrimaryDark">@color/irish_black</item>
+        <item name="colorAccent">@color/irish_gold</item>
+        <item name="android:windowBackground">@color/irish_black</item>
+        <item name="android:statusBarColor">@color/irish_black</item>
+        <item name="android:navigationBarColor">@color/irish_black</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="GlassDialog" parent="Theme.Material3.Dark.Dialog">
+        <item name="android:windowBackground">@color/glass_dark</item>
+        <item name="android:backgroundDimAmount">0.7</item>
+    </style>
+</resources>
